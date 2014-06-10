@@ -26,7 +26,7 @@ import com.jolbox.bonecp.BoneCPDataSource;
 
 @SuppressWarnings("deprecation")
 @Configuration
-@ComponentScan(basePackages = {"com.bnymellon.ctt.myprojects.controller"})
+@ComponentScan(basePackages = {"com.nirensinha.myproject.controller"})
 @EnableWebMvc
 @ImportResource("classpath:applicationContext.xml")
 @PropertySource("classpath:application.properties")
