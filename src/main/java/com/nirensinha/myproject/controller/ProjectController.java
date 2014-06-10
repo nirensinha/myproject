@@ -29,6 +29,13 @@ public class ProjectController {
 		return "myproject";
 	}
 	
+	@RequestMapping(value = "/projects/create", method = RequestMethod.POST)
+	public String post(ModelMap model) {
+		model.addAttribute(VIEW,CREATE);
+		model.addAttribute(VIEW_NAME,CREATE_PROJECT);
+		return "myproject";
+	}
+	
 	@RequestMapping(value = "/projects/edit", method = RequestMethod.GET)
 	public String edit(ModelMap model) {
 		model.addAttribute(VIEW,EDIT);

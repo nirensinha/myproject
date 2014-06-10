@@ -3167,7 +3167,7 @@ div.error label.error:before {
 }
 
 .leftpanel-collapsed .nav-bracket > li.nav-hover.active > a {
-    background: #1CAF9A;
+    background: #f38108;
     color: #fff;
 }
 
@@ -3176,7 +3176,7 @@ div.error label.error:before {
 }
 
 .leftpanel-collapsed .nav-bracket > li.nav-hover.active > a > span:last-child {
-    background: #1CAF9A;
+    background: #f38108;
     color: #fff;
 }
 
