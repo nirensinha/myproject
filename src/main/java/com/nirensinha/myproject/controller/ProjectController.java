@@ -1,9 +1,18 @@
 package com.nirensinha.myproject.controller;
 
+import javax.annotation.Resource;
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.nirensinha.myproject.model.Project;
+import com.nirensinha.myproject.service.ProjectService;
 
 @Controller
 public class ProjectController {
@@ -14,6 +23,10 @@ public class ProjectController {
 	private static String EDIT = "edit";
 	private static String VIEW_NAME = "viewName";
 	private static String CREATE_PROJECT = "Create Project";
+	private static String PROJECT = "project";
+	
+	@Resource
+	ProjectService service;
 
 	
 	@RequestMapping(value = "/projects/", method = RequestMethod.GET)
@@ -26,13 +39,18 @@ public class ProjectController {
 	public String create(ModelMap model) {
 		model.addAttribute(VIEW,CREATE);
 		model.addAttribute(VIEW_NAME,CREATE_PROJECT);
+		model.addAttribute(PROJECT, new Project());
 		return "myproject";
 	}
 	
 	@RequestMapping(value = "/projects/create", method = RequestMethod.POST)
-	public String post(ModelMap model) {
+	public String post(@Valid Project project, BindingResult bindingResult, ModelMap model) {
 		model.addAttribute(VIEW,CREATE);
 		model.addAttribute(VIEW_NAME,CREATE_PROJECT);
+		if (bindingResult.hasErrors()) {
+			return "myproject";
+		}
+		service.create(project);
 		return "myproject";
 	}
 	

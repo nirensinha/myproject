@@ -34,7 +34,27 @@
 					</div>
 				</div>
 			<th:block th:if="${view eq 'create'}">
-				<div th:replace="fragments/createProject"></div>
+				<div class="contentpanel">
+					<form id="createProjectFrm" class="form-horizontal form-bordered"  th:object="${project}" action="#" th:action="@{/projects/create}" method="post">
+					<div class="panel  panel-default">
+						<div class="panel-heading">
+				              <div class="panel-btns">
+					                  <a href="" class="minimize">−</a>
+						                </div>
+		             		  <h4 class="panel-title">Project Details</h4>
+			             </div>
+			              <div class="panel-body panel-body-nopadding">
+						<div th:replace="fragments/createProject"></div>
+					     <div class="panel-footer">
+			            		 <div class="col-sm-6 col-sm-offset-5">
+									  <button class="btn btn-orange">Submit</button>&nbsp;
+				  					<button class="btn btn-default">Cancel</button>
+								</div>
+						 </div>
+						</div>
+			        </div>
+					</form>
+				</div>
 			</th:block>
 		</div>
 </section>
