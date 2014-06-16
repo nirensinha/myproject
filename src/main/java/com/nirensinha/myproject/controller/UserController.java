@@ -1,11 +1,15 @@
 package com.nirensinha.myproject.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nirensinha.myproject.model.User;
 import com.nirensinha.myproject.service.UserService;
@@ -31,6 +35,11 @@ public class UserController {
     	User user = new User(USER_NAME,FIRST_NAME,LAST_NAME,FULL_NAME,EMAIL_ADDRESS,PARENT_ID,ROLE_ID,CREATED_BY,LAST_UPDATED_BY);
     	service.create(user);
 		return "dashboard";
+	}
+	
+	@RequestMapping(value = "/manager/{searchTerm}", method = RequestMethod.GET)
+	public @ResponseBody List<User> index(@PathVariable String searchTerm) {
+		return service.search(searchTerm);
 	}
 
 }

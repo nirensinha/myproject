@@ -11,6 +11,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.*;
 
@@ -20,24 +21,25 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @NamedQuery(name = "User.findByProjectName", query = "SELECT p FROM Project p WHERE LOWER(p	.name) = LOWER(?1)")
 @Table(name="PROJECT")
 public class Project {
-	
+
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID", nullable = false)
 	 private long Id;
 	
-	@NotBlank(message = "Project Title is required")
+	@NotEmpty
 	@Column(name = "NAME", nullable = false)
 	private String name;
 	
 	@Column(name = "MODEL", nullable = true)
 	private int model;
 	
+	@NotEmpty
 	@Column(name = "PPM", nullable = false)
-	private int ppm;
+	private String ppm;
 	
 	@Column(name = "MER", nullable = true)
-	private int mer;
+	private String mer;
 	
 	@Column(name = "MER_NAME", nullable = true)
 	private String merName;
@@ -45,6 +47,7 @@ public class Project {
 	@Column(name = "BUSINESS_SPONSOR", nullable = true)
 	private String businessSponsor;
 	
+	@Min(1)
 	@Column(name = "PROJECT_MANAGER", nullable = false)
 	private long projectManager;
 	
@@ -122,19 +125,19 @@ public class Project {
 		this.model = model;
 	}
 
-	public int getPpm() {
+	public String getPpm() {
 		return ppm;
 	}
 
-	public void setPpm(int ppm) {
+	public void setPpm(String ppm) {
 		this.ppm = ppm;
 	}
 
-	public int getMer() {
+	public String getMer() {
 		return mer;
 	}
 
-	public void setMer(int mer) {
+	public void setMer(String mer) {
 		this.mer = mer;
 	}
 

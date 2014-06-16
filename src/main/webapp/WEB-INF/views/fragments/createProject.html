@@ -4,7 +4,8 @@
 			            		 	
 			            		 	<div class="col-sm-8">
 										    <input type="text"  th:field="*{name}" class="form-control" />
-										    <span class="help-block" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title is Required</span>
+										    <span class="help-block" th:if="${#fields.hasErrors('name')}"   th:errors="*{name}">Title is Required</span>
+
 									 </div>
 			            		 </div>
 			             </div>
@@ -19,10 +20,11 @@
 										         		 </select>
 										</div>
   								  </div>
-			                 <div class="col-xs-6 col-md-4">
+			                 <div class="col-xs-6 col-md-4"  th:classappend="${#fields.hasErrors('ppm')}? 'has-error'">
   								   		<label class="col-sm-4 control-label">PPM ID:<span class="asterisk">*</span></label>
 										 <div class="col-sm-4">
 										         		 <input type="text"  class="form-control"  th:field="*{ppm}"  />
+										         		 <span class="help-block" th:if="${#fields.hasErrors('ppm')}" th:errors="*{ppm}">PPM is Required</span>
 										</div>
   							 </div>
 			               </div>
@@ -48,11 +50,12 @@
 									 </div>
 			            		 </div>
 			             </div>
-			               	 <div class="form-group">
+			               	 <div class="form-group" th:classappend="${#fields.hasErrors('projectManager')}? 'has-error'">
 			            		 <div class="col-xs-12 col-sm-6 col-md-8">
 			            		 	<label class="col-sm-3 control-label">Project Manager:</label>
 			            		 	<div class="col-sm-8">
-										    <input type="text"  class="form-control" th:field="*{projectManager}"/>
+										    <input type="text"  class="form-control typeahead" name="projectManager"  th:autocomplete="off"   id="projectManager" placeholder="Last Name, First Name" th:field="*{projectManager}"/>
+										    <span class="help-block" th:if="${#fields.hasErrors('projectManager')}" th:errors="*{projectManager}">Project Manager is required</span>
 									 </div>
 			            		 </div>
 			             </div>
@@ -86,3 +89,22 @@
 									 </div>
 			            		 </div>
 			             </div>
+ <script>
+ $(document).ready(function(){
+	 var a = $('#projectManager').autocomplete({
+		serviceUrl:'service/autocomplete.ashx',
+		minChars:2,
+		delimiter: /(,|;)\s*/, // regex or character
+		maxHeight:400,
+		width:300,
+		zIndex: 9999,
+		deferRequestBy: 0, //miliseconds
+		params: { country:'Yes' }, //aditional parameters
+		noCache: false, //default is false, set to true to disable caching
+		// callback function:
+		onSelect: function(value, data){ alert('You selected: ' + value + ', ' + data); },
+		// local autosugest options:
+		lookup: ['January', 'February', 'March', 'April', 'May'] //local lookup values
+	});
+ });
+</script>
