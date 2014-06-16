@@ -15,7 +15,7 @@ public interface UserService {
 	
     public User findById(Long id);
 
-    public List<User> search(String searchTerm);
+    public List<User> searchByFullName(String searchTerm);
     
     public User update(User user) throws UserNotFoundException;
 

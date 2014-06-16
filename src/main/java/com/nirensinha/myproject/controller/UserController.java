@@ -37,9 +37,9 @@ public class UserController {
 		return "dashboard";
 	}
 	
-	@RequestMapping(value = "/manager/{searchTerm}", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/byFullName/{searchTerm}", method = RequestMethod.GET)
 	public @ResponseBody List<User> index(@PathVariable String searchTerm) {
-		return service.search(searchTerm);
+		return service.searchByFullName(searchTerm.toLowerCase());
 	}
 
 }

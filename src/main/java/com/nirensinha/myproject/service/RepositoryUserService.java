@@ -40,8 +40,8 @@ public class RepositoryUserService implements UserService{
 	}
 
 	@Override
-	public List<User> search(String searchTerm) {
-		return null;
+	public List<User> searchByFullName(String searchTerm) {
+		return userRepository.searchByFullName(searchTerm);
 	}
 
 	@Override
