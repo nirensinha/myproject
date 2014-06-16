@@ -31,26 +31,22 @@ public class RepositoryUserService implements UserService{
 
 	@Override
 	public List<User> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findAll();
 	}
 
 	@Override
 	public User findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findOne(id);
 	}
 
 	@Override
 	public List<User> search(String searchTerm) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public User update(User user) throws UserNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.save(user);
 	}
 	
 	 protected void setUserRepository(UserRepository userRepository) {
