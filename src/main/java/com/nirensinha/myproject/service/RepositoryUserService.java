@@ -41,7 +41,7 @@ public class RepositoryUserService implements UserService{
 
 	@Override
 	public List<User> searchByFullName(String searchTerm) {
-		return userRepository.searchByFullName(searchTerm);
+		return userRepository.findByFullNameStartingWithIgnoreCase(searchTerm);
 	}
 
 	@Override

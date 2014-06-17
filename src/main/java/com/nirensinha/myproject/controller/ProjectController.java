@@ -38,7 +38,7 @@ public class ProjectController {
 		model.addAttribute(VIEW,CREATE);
 		model.addAttribute(VIEW_NAME,CREATE_PROJECT);
 		model.addAttribute(PROJECT, new Project());
-		return "myproject";
+		return "createProject";
 	}
 	
 	@RequestMapping(value = "/projects/create", method = RequestMethod.POST)
@@ -46,10 +46,10 @@ public class ProjectController {
 		model.addAttribute(VIEW,CREATE);
 		model.addAttribute(VIEW_NAME,CREATE_PROJECT);
 		if (bindingResult.hasErrors()) {
-			return "myproject";
+			return "createProject";
 		}
 		service.create(project);
-		return "myproject";
+		return "createProject";
 	}
 	
 	@RequestMapping(value = "/projects/edit", method = RequestMethod.GET)

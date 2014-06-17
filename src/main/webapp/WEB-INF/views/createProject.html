@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+  <link rel="shortcut icon"  th:href="@{/resources/images/favicon.jpg}"  type="image/jpeg"/>
+  <link th:href="@{/resources/css/default.css}" rel="stylesheet"/>
+   <title>My Project</title>
+     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		  <!--[if lt IE 9]>
+		  <script src="js/html5shiv.min.js"></script>
+		  <script src="js/respond.min.js"></script>
+		  <![endif]-->
+	<div th:replace="fragments/scripts"></div>
+ </head>
+ <body>
+    
+<!-- Preloader -->
+<div id="preloader" >
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+<section>
+		<div th:include="fragments/leftpanel"></div>
+		<div class="mainpanel">
+				<div th:include="fragments/header"></div>
+				<div class="pageheader">
+						<h2>
+							<i class="fa fa-briefcase"></i> Create Project	
+						</h2>
+				</div>
+				<div class="contentpanel">
+					<form id="createProjectFrm" class="form-horizontal form-bordered"  th:object="${project}" action="#" th:action="@{/projects/create}" method="post">
+					<div class="panel  panel-default">
+						<div class="panel-heading">
+				              <div class="panel-btns">
+					                  <a href="" class="minimize">−</a>
+						                </div>
+		             		  <h4 class="panel-title">Project Details</h4>
+			             </div>
+			              <div class="panel-body panel-body-nopadding">	
+		               				<div th:replace="fragments/projectDetails"></div>
+		                <div class="panel-footer">
+			            		 <div class="col-sm-6 col-sm-offset-5">
+									  <button class="btn btn-orange">Submit</button>&nbsp;
+				  					<button class="btn btn-default">Cancel</button>
+								</div>
+						 </div>
+				</div>
+			        </div>
+					</form>
+				</div>
+				</div>
+</section>
+ <script>
+ $(document).ready(function(){
+		$("li#myprojects").addClass("active");
+	 });
+</script>
+</body>
+ </html>

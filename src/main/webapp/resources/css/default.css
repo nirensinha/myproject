@@ -1,7 +1,7 @@
 @import url('bootstrap.min.css');
 @import url('bootstrap-override.css');
 @import url('weather-icons.min.css');
-@import url('jquery-ui-1.10.3.css');
+@import url('jquery-ui-1.10.4.min.css');
 @import url('font-awesome.min.css');
 @import url('animate.min.css');
 @import url('animate.delay.css');
@@ -2951,6 +2951,11 @@ div.error label.error:before {
     display: block;
     margin-top: 10px;
 }
+
+.autocomplete-suggestions { border: 1px solid #999; background: #fff; cursor: default; overflow: auto; }
+.autocomplete-suggestion { padding: 10px 5px; font-size: 1.2em; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #f0f0f0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399ff; }
 
 /* sign in */
 

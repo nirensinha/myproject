@@ -1,4 +1,4 @@
-		               <div class="form-group"  th:classappend="${#fields.hasErrors('name')}? 'has-error'">
+<div class="form-group"  th:classappend="${#fields.hasErrors('name')}? 'has-error'">
 			            		 <div class="col-xs-12 col-sm-6 col-md-8">
 			            		 	<label class="col-sm-3 control-label">Title:<span class="asterisk">*</span></label>
 			            		 	
@@ -54,7 +54,8 @@
 			            		 <div class="col-xs-12 col-sm-6 col-md-8">
 			            		 	<label class="col-sm-3 control-label">Project Manager:</label>
 			            		 	<div class="col-sm-8">
-										    <input type="text"  class="form-control typeahead" name="projectManager"  th:autocomplete="off"   id="projectManager" placeholder="Last Name, First Name" th:field="*{projectManager}"/>
+										    <input type="text"  class="form-control typeahead"   th:autocomplete="off"   id="projectManager" placeholder="Last Name, First Name" />
+										    <input type="hidden"  class="form-control typeahead" name="projectManager"  id="projectManagerId"  th:field="*{projectManager}"/>
 										    <span class="help-block" th:if="${#fields.hasErrors('projectManager')}" th:errors="*{projectManager}">Project Manager is required</span>
 									 </div>
 			            		 </div>
@@ -89,22 +90,35 @@
 									 </div>
 			            		 </div>
 			             </div>
- <script>
- $(document).ready(function(){
-	 var a = $('#projectManager').autocomplete({
-		serviceUrl:'service/autocomplete.ashx',
-		minChars:2,
-		delimiter: /(,|;)\s*/, // regex or character
-		maxHeight:400,
-		width:300,
-		zIndex: 9999,
-		deferRequestBy: 0, //miliseconds
-		params: { country:'Yes' }, //aditional parameters
-		noCache: false, //default is false, set to true to disable caching
-		// callback function:
-		onSelect: function(value, data){ alert('You selected: ' + value + ', ' + data); },
-		// local autosugest options:
-		lookup: ['January', 'February', 'March', 'April', 'May'] //local lookup values
-	});
- });
-</script>
+			   <script>
+			   $(document).ready(function(){
+				   var id= $("#projectManagerId").val();
+				   if(id > 0){
+				  		 $.getJSON("/myproject/user/byID/"+id,function(data){
+				  			$('#projectManager').val(data.fullName);
+				  		 });
+				   }
+				   $('#projectManager').autocomplete({
+					   minLength: 2,
+					   source: function(request, response,term) {  
+						   var param = request.term;  
+						   $.ajax({  
+			                    url: "/myproject/user/byFullName/"+param,  
+			                    dataType: "json",  
+			                    type:"GET",  
+			                    success: function (data) {  
+			                         response($.map(data, function(item) {  
+			                             return {   
+			                                 label: item.fullName,  
+			                                 shform: item.id, //can add number of attributes here   
+												};  
+			                             }));//END Success  
+			                        },  
+			                });//END AJAX  
+					   },  
+			            select: function( event, ui ) { //   
+			            	$("#projectManagerId").val( ui.item.shform);
+			            }   
+			        });     // End 
+			   });
+			   </script>

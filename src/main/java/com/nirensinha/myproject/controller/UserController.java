@@ -41,5 +41,10 @@ public class UserController {
 	public @ResponseBody List<User> index(@PathVariable String searchTerm) {
 		return service.searchByFullName(searchTerm.toLowerCase());
 	}
+	
+	@RequestMapping(value = "/user/byID/{id}", method = RequestMethod.GET)
+	public @ResponseBody User  getUser(@PathVariable long id) {
+		return service.findById(id);
+	}
 
 }
