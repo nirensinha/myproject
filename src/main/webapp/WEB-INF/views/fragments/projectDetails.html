@@ -74,10 +74,11 @@
 			                 <div class="col-xs-6 col-md-4">
   								   		<label class="col-sm-4 control-label">Project Size:</label>
 										 <div class="col-sm-4">
-										         		 <select class="form-control" >
-										         		 	<option>Option 1</option>
-										         		 	<option>Option 2</option>
-										         		 	<option>Option 3</option>
+										         		 <select class="form-control" th:field="*{projectSize}" >
+																		<option value="" >[--Select--]</option>
+																		<option value="Small">Small</option>
+																		<option value="Medium">Medium</option>
+																		<option value="Large">Large</option>
 										         		 </select>
 										</div>
   							 </div>

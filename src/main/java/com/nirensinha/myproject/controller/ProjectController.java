@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.nirensinha.myproject.model.Project;
 import com.nirensinha.myproject.service.ProjectService;
+import com.nirensinha.myproject.service.ReferenceDataService;
 
 @Controller
 public class ProjectController {
@@ -25,6 +26,9 @@ public class ProjectController {
 	
 	@Resource
 	ProjectService service;
+	
+	@Resource
+	ReferenceDataService referenceDataService;
 
 	
 	@RequestMapping(value = "/projects/", method = RequestMethod.GET)
@@ -35,9 +39,8 @@ public class ProjectController {
 	
 	@RequestMapping(value = "/projects/create", method = RequestMethod.GET)
 	public String create(ModelMap model) {
-		model.addAttribute(VIEW,CREATE);
-		model.addAttribute(VIEW_NAME,CREATE_PROJECT);
 		model.addAttribute(PROJECT, new Project());
+		referenceDataService.getInvestment();
 		return "createProject";
 	}
 	
