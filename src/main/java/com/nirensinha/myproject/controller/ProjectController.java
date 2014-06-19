@@ -23,6 +23,12 @@ public class ProjectController {
 	private static String VIEW_NAME = "viewName";
 	private static String CREATE_PROJECT = "Create Project";
 	private static String PROJECT = "project";
+	private static String INVESTMENT = "investment";
+	private static String PHASE = "phase";
+	private static String PROJECTMODEL = "projectModel";
+	private static String PROJECTSIZE = "projectSize";
+	private static String RAG = "rag";
+	
 	
 	@Resource
 	ProjectService service;
@@ -34,13 +40,14 @@ public class ProjectController {
 	@RequestMapping(value = "/projects/", method = RequestMethod.GET)
 	public String list(ModelMap model) {
 		model.addAttribute(VIEW,LIST);
+		
 		return "myproject";
 	}
 	
 	@RequestMapping(value = "/projects/create", method = RequestMethod.GET)
 	public String create(ModelMap model) {
 		model.addAttribute(PROJECT, new Project());
-		referenceDataService.getInvestment();
+		loadReferenceData(model);
 		return "createProject";
 	}
 	
@@ -66,4 +73,14 @@ public class ProjectController {
 		return "allproject";
 	}
 
+	private ModelMap loadReferenceData(ModelMap model){
+		model.addAttribute(INVESTMENT,referenceDataService.getInvestment());
+		model.addAttribute(PHASE,referenceDataService.getPhase());
+		model.addAttribute(PROJECTMODEL,referenceDataService.getProjectModel());
+		model.addAttribute(PROJECTSIZE,referenceDataService.getProjectSize());
+		model.addAttribute(RAG,referenceDataService.getRAG());
+		
+	
+		return model;
+	}
 }

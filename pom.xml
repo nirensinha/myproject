@@ -18,7 +18,8 @@
         <slf4j.version>1.7.5</slf4j.version>
         <org.thymeleaf-version>2.1.2.RELEASE</org.thymeleaf-version>
         <querydsl.version>3.3.4</querydsl.version>
-    </properties>
+        <hibernate.version>4.3.5.Final</hibernate.version>
+  </properties>
   <dependencyManagement>
         <dependencies>
             <dependency>
@@ -51,17 +52,27 @@
   <dependency>
 	<groupId>org.hibernate</groupId>
 	<artifactId>hibernate-entitymanager</artifactId>
-	<version>4.3.5.Final</version>
+	<version>${hibernate.version}</version>
 </dependency>
 <dependency>
 	<groupId>org.hibernate</groupId>
 	<artifactId>hibernate-validator</artifactId>
-	<version>4.3.0.Final</version>
+	<version>5.1.1.Final</version>
 </dependency>
+<!-- <dependency>
+	<groupId>org.hibernate</groupId>
+	<artifactId>hibernate-ehcache</artifactId>
+	<version>${hibernate.version}</version>
+</dependency> -->
 <dependency>
 	<groupId>javax.validation</groupId>
 	<artifactId>validation-api</artifactId>
-	<version>1.0.0.GA</version>
+	<version>1.1.0.Final</version>
+</dependency>
+<dependency>
+	<groupId>net.sf.ehcache</groupId>
+	<artifactId>ehcache-core</artifactId>
+	<version>2.6.9</version>
 </dependency>
 <dependency>
 	<groupId>mysql</groupId>
