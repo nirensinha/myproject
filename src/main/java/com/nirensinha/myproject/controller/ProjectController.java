@@ -6,9 +6,11 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.nirensinha.myproject.exception.ProjectNotFoundException;
 import com.nirensinha.myproject.model.Project;
 import com.nirensinha.myproject.service.ProjectService;
 import com.nirensinha.myproject.service.ReferenceDataService;
@@ -20,8 +22,6 @@ public class ProjectController {
 	private static String LIST = "list";
 	private static String CREATE = "create";
 	private static String EDIT = "edit";
-	private static String VIEW_NAME = "viewName";
-	private static String CREATE_PROJECT = "Create Project";
 	private static String PROJECT = "project";
 	private static String INVESTMENT = "investment";
 	private static String PHASE = "phase";
@@ -37,38 +37,54 @@ public class ProjectController {
 	ReferenceDataService referenceDataService;
 
 	
-	@RequestMapping(value = "/projects/", method = RequestMethod.GET)
+	@RequestMapping(value = "/project/", method = RequestMethod.GET)
 	public String list(ModelMap model) {
 		model.addAttribute(VIEW,LIST);
-		
 		return "myproject";
 	}
 	
-	@RequestMapping(value = "/projects/create", method = RequestMethod.GET)
+	@RequestMapping(value = "/project/create", method = RequestMethod.GET)
 	public String create(ModelMap model) {
 		model.addAttribute(PROJECT, new Project());
+		model.addAttribute(VIEW,CREATE);
 		loadReferenceData(model);
 		return "createProject";
 	}
 	
-	@RequestMapping(value = "/projects/create", method = RequestMethod.POST)
+	@RequestMapping(value = "/project/create", method = RequestMethod.POST)
 	public String post(@Valid Project project, BindingResult bindingResult, ModelMap model) {
-		model.addAttribute(VIEW,CREATE);
-		model.addAttribute(VIEW_NAME,CREATE_PROJECT);
 		if (bindingResult.hasErrors()) {
 			return "createProject";
 		}
 		service.create(project);
-		return "createProject";
+		return "redirect:/project/edit/"+project.getId();
 	}
 	
-	@RequestMapping(value = "/projects/edit", method = RequestMethod.GET)
-	public String edit(ModelMap model) {
+	@RequestMapping(value = "/project/edit/{id}", method = RequestMethod.GET)
+	public String edit(ModelMap model, @PathVariable long id) {
 		model.addAttribute(VIEW,EDIT);
-		return "myproject";
+		Project project = service.findById(id);
+		model.addAttribute(PROJECT,project);
+		loadReferenceData(model);
+		return "editProject";
 	}
 	
-	@RequestMapping(value = "/projects/all", method = RequestMethod.GET)
+	@RequestMapping(value = "/project/save", method = RequestMethod.POST)
+	public String save(@Valid Project project, BindingResult bindingResult, ModelMap model) {
+		if (!bindingResult.hasErrors()) {
+			try {
+				service.save(project);
+			} catch (ProjectNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		model.addAttribute(VIEW,EDIT);
+		loadReferenceData(model);
+		return "editProject";
+	}
+	
+	@RequestMapping(value = "/project/all", method = RequestMethod.GET)
 	public String listAll(ModelMap model) {
 		return "allproject";
 	}

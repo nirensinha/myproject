@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.nirensinha.myproject.exception.UserNotFoundException;
@@ -40,6 +41,7 @@ public class RepositoryUserService implements UserService{
 	}
 
 	@Override
+	@Cacheable(value="userCache")
 	public List<User> searchByFullName(String searchTerm) {
 		return userRepository.findByFullNameStartingWithIgnoreCase(searchTerm);
 	}

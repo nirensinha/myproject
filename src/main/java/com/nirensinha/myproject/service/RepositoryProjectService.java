@@ -35,8 +35,7 @@ public class RepositoryProjectService implements ProjectService {
 
 	@Override
 	public Project findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return projectRepository.findOne(id);
 	}
 
 	@Override
@@ -46,9 +45,8 @@ public class RepositoryProjectService implements ProjectService {
 	}
 
 	@Override
-	public Project update(Project project) throws ProjectNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+	public Project save(Project project) throws ProjectNotFoundException {
+		return projectRepository.save(project);
 	}
 
 }

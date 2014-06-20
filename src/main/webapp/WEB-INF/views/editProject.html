@@ -27,11 +27,11 @@
 				<div th:include="fragments/header"></div>
 				<div class="pageheader">
 						<h2>
-							<i class="fa fa-briefcase"></i> Create Project	
+							<i class="fa fa-briefcase"></i> Edit Project	
 						</h2>
 				</div>
 				<div class="contentpanel">
-					<form id="createProjectFrm" class="form-horizontal form-bordered"  th:object="${project}" action="#" th:action="@{/project/create}" method="post">
+					<form id="createProjectFrm" class="form-horizontal form-bordered"  th:object="${project}" action="#" th:action="@{/project/save}" method="post">
 					<div class="panel  panel-default">
 						<div class="panel-heading">
 				              <div class="panel-btns">

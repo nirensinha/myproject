@@ -17,7 +17,7 @@ public interface ProjectService {
 
     public List<Project> search(String searchTerm);
     
-    public Project update(Project project) throws ProjectNotFoundException;
+    public Project save(Project project) throws ProjectNotFoundException;
 
 
 }
