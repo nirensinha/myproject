@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <title>My Project</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+</head>
+<body>
+<form class="form-narrow form-horizontal" action="/j_spring_security_check" method="post" th:action="@{/j_spring_security_check}">
+    <th:block th:if="${param.error != null}">
+        <div th:replace="fragments/alert :: alert (type='danger', message='Sign in error. Please try again.')">Alert</div>
+    </th:block>
+      <th:block th:if="${param.logout!= null}">
+        <div th:replace="fragments/alert :: alert (type='success', message='You have successfully logged out.')">Alert</div>
+    </th:block>
+    <fieldset>
+        <legend>Sign in</legend>
+        <div class="form-group">
+            <div class="col-lg-10">
+                <input type="text" class="form-control username" id="username" placeholder="Username" name="j_username" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10">
+                <input type="password" class="form-control password"  id="password" placeholder="Password" name="j_password" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="_spring_security_remember_me" /> Remember me
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-4 col-lg-10">
+                <button type="submit" class="btn btn-orange">Sign in</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<script src="../js/jquery-1.10.2.min.js" th:src="@{/resources/js/jquery-1.10.2.min.js}"></script>
+<script> $(document).ready(function(){$(".close").click(function(){$(".alert-dismissable").hide();});});</script>
+</body>
+</html>

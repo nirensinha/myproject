@@ -9,16 +9,21 @@
 	<context:property-placeholder location="classpath:application.properties"/> 
      <import resource="classpath:datasource.xml"/>
      <import resource="classpath:applicationContext.xml"/>
+      <import resource="classpath:spring-security.xml"/>
 	
    <bean id="templateResolver" class=" org.thymeleaf.templateresolver.ServletContextTemplateResolver"
 			p:prefix="/WEB-INF/views/"  p:suffix=".html" p:templateMode="HTML5" p:cacheable="false"/>
 			
 	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine"
-			p:templateResolver-ref="templateResolver"/>
+			p:templateResolver-ref="templateResolver"
+			p:additionalDialects-ref="springSecurityDialect"
+			/>
  	
  
      <bean id="viewResolver"  class="org.thymeleaf.spring4.view.ThymeleafViewResolver" 
         p:templateEngine-ref="templateEngine"  p:characterEncoding="UTF-8"/>
+        
+        <bean id ="springSecurityDialect" class="org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect"/>
 
 
 

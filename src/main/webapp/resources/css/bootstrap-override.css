@@ -1302,8 +1302,26 @@ width: 60%;
 width: 40%;
 }
 }
-@media (min-width: 768px){}
+@media (min-width: 768px){
 .col-sm-4 {
-width: 45%;
+  width: 45%;
 }
+}
+
+@media screen and (max-width: 640px) {
+	.col-sm-4 {
+  			width: 45%;
+			}
+}
+
+@media screen and (max-width: 480px) {
+	.col-sm-4 {
+ 		 width: 45%;
+   }
+}
+
+@media screen and (max-width: 360px) {
+	.col-sm-4 {
+  		width: 100%;
+		}
 }

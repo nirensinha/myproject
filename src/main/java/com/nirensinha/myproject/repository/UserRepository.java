@@ -9,5 +9,7 @@ import com.nirensinha.myproject.model.User;
 public interface UserRepository extends JpaRepository<User, Long>{
 
 	public List<User> findByFullNameStartingWithIgnoreCase(String searchTerm) ;
+	
+	public User findByUserName(String username);
 
 }

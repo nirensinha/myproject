@@ -50,9 +50,4 @@ public class RepositoryUserService implements UserService{
 	public User update(User user) throws UserNotFoundException {
 		return userRepository.save(user);
 	}
-	
-	 protected void setUserRepository(UserRepository userRepository) {
-	        this.userRepository = userRepository;
-	    }
-
 }

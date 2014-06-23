@@ -9,9 +9,16 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
 
-	<bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource"
+ <!-- 	<bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource"
 		p:jdbcUrl="${db.url}" p:username="${db.username}" p:password="${db.password}"
-		destroy-method="close" />
+		destroy-method="close" /> -->
+		
+     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+          <property name="jndiName" value="java:comp/env/jdbc/MySQLDS"/>
+          <property name="lookupOnStartup" value="true"/>
+          <property name="proxyInterface" value="javax.sql.DataSource"/>
+     </bean>
+   		
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">

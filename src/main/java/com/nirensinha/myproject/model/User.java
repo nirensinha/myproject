@@ -27,6 +27,9 @@ public class User {
 	
 	@Column(name = "USER_NAME", nullable = false)
 	 private String userName;
+	
+	@Column(name = "PASSWORD", nullable = false)
+	 private String password;
 	 
 	@Column(name = "FIRST_NAME", nullable = false)
 	 private String firstName;
@@ -44,7 +47,7 @@ public class User {
 	 private long parentId;
 	 
 	@Column(name = "ROLE_ID", nullable = false)
-	 private int roleId;
+	 private String  roleId;
 	 
 	@Column(name = "CREATED_BY", nullable = false)
 	 private long createdBy;
@@ -60,9 +63,10 @@ public class User {
 	
 	public User(){};
 	
-	public User(String userName, String firstName, String lastName, String fullName, String emailAddress, long parentId, int roleId, long createdBy, long lastUpdatedBy){
+	public User(String userName, String password, String firstName, String lastName, String fullName, String emailAddress, long parentId, String roleId, long createdBy, long lastUpdatedBy){
 		//this.Id= Id;
 		this.userName = userName;
+		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.fullName = fullName;
@@ -129,11 +133,11 @@ public class User {
 		this.parentId = parentId;
 	}
 
-	public int getRoleId() {
+	public String getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(int roleId) {
+	public void setRoleId(String roleId) {
 		this.roleId = roleId;
 	}
 
@@ -188,4 +192,12 @@ public class User {
 	    public String toString() {
 	        return ToStringBuilder.reflectionToString(this);
 	    }
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

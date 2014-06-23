@@ -20,5 +20,4 @@ public interface UserService {
     public User update(User user) throws UserNotFoundException;
 
 
-	
 }
