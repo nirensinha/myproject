@@ -193,4 +193,40 @@
             </plugin>	
   </plugins>
  </build>
+  <profiles>
+        <profile>
+            <id>openshift</id>
+            <build>
+              <plugins>
+                    <plugin>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>2.1.1</version>
+                        <configuration>
+                            <outputDirectory>webapps</outputDirectory>
+                            <warName>ROOT</warName>
+                        </configuration>
+                    </plugin>
+           	  		<plugin>
+				      <groupId>org.apache.maven.plugins</groupId>
+				      <artifactId>maven-enforcer-plugin</artifactId>
+				      <configuration>
+				        <skip>true</skip>
+				      </configuration>
+            	</plugin>
+             </plugins>
+            </build>
+	    <repositories>
+		<repository>
+		  <id>sonatype-oss-public</id>
+		  <url>https://oss.sonatype.org/content/groups/public</url>
+		  <releases>
+		    <enabled>true</enabled>
+		  </releases>
+		  <snapshots>
+		    <enabled>true</enabled>
+		  </snapshots>
+		</repository>
+      	</repositories>
+        </profile>
+    </profiles>
 </project>
