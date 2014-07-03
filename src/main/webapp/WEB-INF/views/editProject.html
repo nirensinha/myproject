@@ -7,6 +7,7 @@
   <meta name="author" content=""/>
   <link rel="shortcut icon"  th:href="@{/resources/images/favicon.jpg}"  type="image/jpeg"/>
   <link th:href="@{/resources/css/default.css}" rel="stylesheet"/>
+    <link th:href="@{/resources/css/jquery.ui.override.css}" rel="stylesheet"/>
    <title>My Project</title>
      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		  <!--[if lt IE 9]>
@@ -29,6 +30,9 @@
 						<h2>
 							<i class="fa fa-briefcase"></i> Edit Project	
 						</h2>
+					<div class="create-button">
+							 <button class="btn btn-orange" id="createStatus" data-toggle="modal" data-target=".create-status-modal">Create Status</button>
+					</div>
 				</div>
 				<div class="contentpanel">
 					<form id="createProjectFrm" class="form-horizontal form-bordered"  th:object="${project}" action="#" th:action="@{/project/save}" method="post">
@@ -52,10 +56,25 @@
 					</form>
 				</div>
 				</div>
-</section>
- <script>
+		</section>
+			<div class="modal fade create-status-modal" tabindex="-1" role="dialog" aria-labelledby="createStatus" aria-hidden="true" data-backdrop="static">
+			  <div class="modal-dialog modal-lg">
+			    <div class="modal-content">
+			       
+			    </div>
+			  </div>
+			</div>
+
+<script th:inline="javascript">
  $(document).ready(function(){
 		$("li#myprojects").addClass("active");
+		jQuery('#datepicker').datepicker();
+		var statusUrl = /*[[@{/status}]]*/;
+		$("#createStatus").click(function(){
+			  var id = $("#id").val();
+			  var name = $("#name").val();
+			  $(".modal-content").load(statusUrl+"/"+encodeURIComponent(name)+"/"+id);
+		});
 	 });
 </script>
 </body>
