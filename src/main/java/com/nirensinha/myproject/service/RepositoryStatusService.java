@@ -1,5 +1,9 @@
 package com.nirensinha.myproject.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,6 +19,8 @@ public class RepositoryStatusService implements StatusService{
 	
 	@Resource
 	private StatusRepository statusRepository;
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("MMddyyyy");
 
 	@Override
 	@Transactional
@@ -40,7 +46,47 @@ public class RepositoryStatusService implements StatusService{
 
 	@Override
 	public Status save(Status status) {
+		status.setReportDate(getMonday(status.getReportDate()));
 		return statusRepository.save(status);
+	}
+
+	@Override
+	public String checkStatus(long projectId, String reportDate) {
+		Date date;
+		try{
+			date = sdf.parse(reportDate);
+			date = getMonday(date);
+		}catch (ParseException e){
+			return "Report Date is invalid";
+		}
+
+		Status status = statusRepository.findStatusByProjectIdAndReportDate(projectId, date);
+		if(status == null)
+				return "success";
+		else
+				return "Status Report already exists";
+		
+	}
+	
+	private Date getMonday(Date date){
+		Date date_;
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		date_ = c.getTime();
+		return date_;
+	}
+
+	@Override
+	public Status findByProjectIdAndReportDate(long projectId, String reportDate) {
+		Date date;
+		try{
+			date = sdf.parse(reportDate);
+			date = getMonday(date);
+		}catch (ParseException e){
+			return new Status();
+		}
+		return statusRepository.findStatusByProjectIdAndReportDate(projectId, date);
 	}
 
 }

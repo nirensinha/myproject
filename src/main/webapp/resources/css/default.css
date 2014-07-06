@@ -4248,7 +4248,7 @@ div.error label.error:before {
         font-size: 11px;
     }
 
-    .fc-header td {
+.fc-header td {
         display: block !important;
         text-align: center;
         width: 100%;

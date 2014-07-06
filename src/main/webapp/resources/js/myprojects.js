@@ -11,6 +11,8 @@ jQuery(window).load(function() {
    jQuery('#preloader').delay(350).fadeOut(function(){
       jQuery('body').delay(350).css({'overflow':'visible'});
    });
+   
+   
 });
 
 jQuery(document).ready(function() {

@@ -200,3 +200,13 @@
 .ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current {
 	float: left;
 }
+.ui-datepicker-next:hover {
+	top: 2px;
+	right: 2px;
+	background-color: #1CAF9A;
+	cursor: pointer;
+}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus{
+	border:none;
+	background-color:#f38108;
+}

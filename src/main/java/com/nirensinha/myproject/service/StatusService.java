@@ -15,4 +15,8 @@ public interface StatusService {
 	    public Status findById(Long id);
 
 	    public Status save(Status status);
+	    
+	    public String checkStatus(long projectId, String reportDate);
+	    
+	    public Status findByProjectIdAndReportDate(long projectId, String reportDate);
 }
