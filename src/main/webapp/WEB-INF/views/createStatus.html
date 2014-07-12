@@ -38,7 +38,8 @@
 		
 		   var findStatusurl = /*[[@{/findStatus}]]*/;
 
-		$("#submit").click(function(){
+		$("#submit").click(function(event){
+			event.preventDefault();
 			 var projectId= $("#projectId").val();
 			 
 			 if($("#datepicker").val() == ""){
@@ -50,7 +51,7 @@
                    url: findStatusurl+"/"+projectId+"/"+date,  
                    dataType: "text",  
                    type:"GET",  
-                   success: function (data) {  
+                   success: function (data) {
                        if(data == "success"){
                     	   return true;
                        }else{

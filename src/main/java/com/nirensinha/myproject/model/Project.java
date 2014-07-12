@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -18,7 +17,6 @@ import org.hibernate.validator.constraints.*;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Entity
-@NamedQuery(name = "User.findByProjectName", query = "SELECT p FROM Project p WHERE LOWER(p	.name) = LOWER(?1)")
 @Table(name="PROJECT")
 public class Project {
 
@@ -98,6 +96,7 @@ public class Project {
 
 	@Column(name = "LAST_UPDATED_DATE", nullable = false)
 	 private Date lastUpdatedDate;
+	
 	
 	public Project(){}
 
@@ -312,5 +311,6 @@ public class Project {
 	    public String toString() {
 	        return ToStringBuilder.reflectionToString(this);
 	    }
+
 
 }

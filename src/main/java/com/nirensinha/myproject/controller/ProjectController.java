@@ -1,5 +1,7 @@
 package com.nirensinha.myproject.controller;
 
+import java.security.Principal;
+
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
@@ -9,11 +11,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nirensinha.myproject.exception.ProjectNotFoundException;
 import com.nirensinha.myproject.model.Project;
+import com.nirensinha.myproject.model.ProjectList;
 import com.nirensinha.myproject.service.ProjectService;
 import com.nirensinha.myproject.service.ReferenceDataService;
+import com.nirensinha.myproject.service.UserService;
 
 @Controller
 public class ProjectController {
@@ -35,6 +40,9 @@ public class ProjectController {
 	
 	@Resource
 	ReferenceDataService referenceDataService;
+	
+	@Resource
+	UserService userService;
 
 	
 	@RequestMapping(value = "/project/", method = RequestMethod.GET)
@@ -87,6 +95,14 @@ public class ProjectController {
 	@RequestMapping(value = "/project/all", method = RequestMethod.GET)
 	public String listAll(ModelMap model) {
 		return "allproject";
+	}
+	
+	@RequestMapping(value = "/project/my", method = RequestMethod.GET)
+	public @ResponseBody ProjectList listMy(Principal principal) {
+		long projectManager = (userService.findByUsername(principal.getName())).getId();
+		ProjectList list = new ProjectList();
+		list.setData(service.findMy(projectManager));
+		return list;
 	}
 
 	private ModelMap loadReferenceData(ModelMap model){

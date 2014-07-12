@@ -11,18 +11,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nirensinha.myproject.model.Project;
 import com.nirensinha.myproject.model.Status;
+import com.nirensinha.myproject.service.ProjectService;
 import com.nirensinha.myproject.service.StatusService;
 
 @Controller
 public class StatusController {
 	
 	private static String STATUS = "status";
+	private static String PROJECT = "project";
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("MMddyyyy");
 	
 	@Resource
 	StatusService service;
+	
+	@Resource
+	ProjectService projectService;
+	
 	
 	@RequestMapping(value = "/status/{projectName}/{projectId}", method = RequestMethod.GET)
 	public String getStatus(ModelMap model, @PathVariable String projectName, @PathVariable long projectId) {
@@ -46,6 +53,8 @@ public class StatusController {
 			Status status =  service.findByProjectIdAndReportDate(projectId, reportDate);
 			model.addAttribute(STATUS,status);
 		}
+		Project project = projectService.findById(projectId);
+		model.addAttribute(PROJECT,project);
 		return  "editStatus";
 	}
 	

@@ -7,6 +7,8 @@
   <meta name="author" content=""/>
   <link rel="shortcut icon"  th:href="@{/resources/images/favicon.jpg}"  type="image/jpeg"/>
   <link th:href="@{/resources/css/default.css}" rel="stylesheet"/>
+  <link th:href="@{/resources/css/jquery.dataTables.css}" rel="stylesheet"/>
+  
    <title>My Project</title>
      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		  <!--[if lt IE 9]>
@@ -33,11 +35,57 @@
 							<a class="btn btn-orange" th:href="@{/project/create}">Create Project</a>
 					</div>
 				</div>
+				<div class="contentpanel">
+		        <div class="row">
+				<div class="col-md-12">
+					<div class="table-responsive dashboard-datatable">
+					<table id="myProjects" class="table" cellspacing="0" width="100%">
+				        <thead>
+				            <tr>
+				                <th>Project Name</th>
+				                <th>PPM ID</th>
+				                <th>Project Manager</th>
+				                <th>RAG</th>
+				                <th>Methodology</th>
+				            </tr>
+				        </thead>
+					</table>
+					</div>
+			     </div>
+			     </div>
+			</div>
 		</div>
 </section>
-<script>
+<script th:inline="javascript">
 $(document).ready(function(){
+	var myprojecturl = /*[[@{/project/my}]]*/;
+	var editprojecturl = /*[[@{/project/edit}]]*/;
 	$("li#myprojects").addClass("active");
+	$('#myProjects').dataTable({
+		"bPaginate": false,
+		 "bProcessing": true,
+		 "bFilter":false,
+		 "ajax": myprojecturl,
+		 "columns":[
+		            {"data":"name"},
+		            {"data":"ppm"},
+		            {"data":"projectManager"},
+		            {"data":"overallRag"},
+		            {"data":"overallRag"}
+		            ]
+	});
+	$('#myProjects tbody tr').live('click', function () { 
+		var aData = $('#myProjects').dataTable().fnGetData(this);
+		 window.location = editprojecturl+"/"+aData.id;
+		}
+	);
+	
+	
+	$('#myProjects tbody').hover(function() {
+	    $(this).css('cursor', 'pointer');
+	}, function() {
+	    $(this).css('cursor', 'auto');
+	});
 });
 </script>
 </body>

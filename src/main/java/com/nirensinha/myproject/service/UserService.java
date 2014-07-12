@@ -14,6 +14,8 @@ public interface UserService {
 	public List<User> findAll();
 	
     public User findById(Long id);
+    
+    public User findByUsername(String username);
 
     public List<User> searchByFullName(String searchTerm);
     

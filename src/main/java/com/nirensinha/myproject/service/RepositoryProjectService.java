@@ -49,4 +49,9 @@ public class RepositoryProjectService implements ProjectService {
 		return projectRepository.save(project);
 	}
 
+	@Override
+	public List<Project> findMy(long projectManager) {
+		return projectRepository.findProjectByProjectManager(projectManager);
+	}
+
 }

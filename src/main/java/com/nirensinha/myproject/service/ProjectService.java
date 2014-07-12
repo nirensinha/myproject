@@ -13,6 +13,8 @@ public interface ProjectService {
 	
 	public List<Project> findAll();
 	
+	public List<Project> findMy(long projectManager);
+	
     public Project findById(Long id);
 
     public List<Project> search(String searchTerm);

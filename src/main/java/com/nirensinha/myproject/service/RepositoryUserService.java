@@ -50,4 +50,9 @@ public class RepositoryUserService implements UserService{
 	public User update(User user) throws UserNotFoundException {
 		return userRepository.save(user);
 	}
+
+	@Override
+	public User findByUsername(String username) {
+		return userRepository.findByUserName(username);
+	}
 }

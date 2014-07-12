@@ -13,8 +13,17 @@
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
-	<mvc:annotation-driven />
+	<mvc:annotation-driven conversion-service="conversionService"/>
 	<jpa:repositories base-package="com.nirensinha.myproject.repository" />
+	
+	<bean id="conversionService"
+        class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+    <property name="formatters">
+      <set>
+        <bean class="com.nirensinha.myproject.config.DateFormatter" />
+      </set>
+    </property>
+  </bean>
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">

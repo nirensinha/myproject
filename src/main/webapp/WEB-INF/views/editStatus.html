@@ -21,5 +21,45 @@
 <div id="preloader" >
     <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
 </div>
+<section>
+		<div th:include="fragments/leftpanel"></div>
+		<div class="mainpanel">
+				<div th:include="fragments/header"></div>
+				<div class="pageheader">
+						<h2>
+							<i class="fa fa-file-text"></i> Edit Project Status
+						</h2>
+				</div>
+				<div class="contentpanel">
+					<form id="createProjectFrm" class="form-horizontal form-bordered"  th:object="${status}" >
+						<div class="panel  panel-default">
+										<div class="panel-heading">
+								              <div class="panel-btns">
+									                  <a href="" class="minimize">−</a>
+										                </div>
+						             		  <h4 class="panel-title">Report Summary</h4>
+						             		  	<div class="panel-body panel-body-nopadding">	
+						             		  			<div class="form-group" >
+						             		  				 <div class="col-xs-12 col-sm-6 col-md-8">
+			            		 									<label class="col-sm-3 control-label">Report Date:</label>
+			            		 									<div class="col-sm-8">
+			            		 											<span  th:text="${#dates.format(reportDate,'MM/dd/YYYY')}" class="form-control-static"/>
+			            		 									</div>
+						             		  			</div>
+						             		  	
+						             		  	</div>
+							             </div>
+							</div>
+				</div>
+				</form>
+				    <div th:replace="fragments/projectSummaryView"></div>
+				</div>
+		</div>
+</section>
+ <script>
+ $(document).ready(function(){
+		$("li#myprojects").addClass("active");
+	 });
+</script>
 </body>
 </html>
