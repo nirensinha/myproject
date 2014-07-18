@@ -15,7 +15,7 @@
 										 <div class="col-sm-4">
 													 <select class="form-control" th:field="*{model}" >
 										         		 <option value="0" >--</option>
-										         		 <option th:each="pm: ${projectModel}" th:value="${pm.id}"  th:text="${pm.name}"></option>
+										         		 <option th:each="pm: ${projectModel}" th:value="${pm.key}"  th:text="${pm.value.name}"></option>
 								         		 	</select>
 										</div>
   								  </div>
@@ -54,7 +54,7 @@
 			            		 	<label class="col-sm-3 control-label">Project Manager:</label>
 			            		 	<div class="col-sm-8">
 										    <input type="text"  class="form-control typeahead"   th:autocomplete="off"   id="projectManager" placeholder="Last Name, First Name"  th:readonly="${view} == 'edit'"/>
-										    <input type="hidden"  class="form-control typeahead" name="projectManager"  id="projectManagerId"  th:field="*{projectManager}"/>
+										    <input type="hidden"  class="form-control" name="projectManager"  id="projectManagerId"  th:field="*{projectManager}"/>
 										    <span class="help-block" th:if="${#fields.hasErrors('projectManager')}" th:errors="*{projectManager}">Project Manager is required</span>
 									 </div>
 			            		 </div>
@@ -65,7 +65,7 @@
 										 <div class="col-sm-4">
 										         		<select class="form-control" th:field="*{investmentTheme}" >
 										         		 <option value="0" >--</option>
-										         		 <option th:each="i: ${investment}" th:value="${i.id}"  th:text="${i.name}" ></option>
+										         		 <option th:each="i: ${investment}" th:value="${i.key}"  th:text="${i.value.name}" ></option>
 								         		 	</select>
 										</div>
   								  </div>
@@ -74,7 +74,7 @@
 										 <div class="col-sm-4">
 										         		 <select class="form-control" th:field="*{projectSize}" >
 																		<option value="0" >--</option>
-																		 <option th:each="s: ${projectSize}" th:value="${s.id}"  th:text="${s.name}"></option>
+																		 <option th:each="s: ${projectSize}" th:value="${s.key}"  th:text="${s.value.name}"></option>
 										         		 </select>
 										</div>
   							 </div>

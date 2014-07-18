@@ -19,7 +19,7 @@
 			            	   <div class="col-xs-12 col-sm-6 col-md-8">
   								   		<label class="col-sm-3 control-label">Model:</label>
 										 <div class="col-sm-4">
-										 	<span  th:text="*{model}" class="form-control-static"/>
+										 	<span  th:text="*{modelName}" class="form-control-static"/>
 										</div>
   								  </div>
 			                 <div class="col-xs-6 col-md-4"  th:classappend="${#fields.hasErrors('ppm')}? 'has-error'">
@@ -56,7 +56,8 @@
 			            		 <div class="col-xs-12 col-sm-6 col-md-8">
 			            		 	<label class="col-sm-3 control-label">Project Manager:</label>
 			            		 	<div class="col-sm-8">
-			            		 	    <span th:text="*{businessSponsor}" class="form-control-static"/>
+			            		 	    <span id="projectManger" class="form-control-static"/>
+			            		 	    <input type="hidden"  class="form-control" name="projectManager"  id="projectManagerId"  th:field="*{projectManager}"/>
 									 </div>
 			            		 </div>
 			             </div>
@@ -64,13 +65,13 @@
 			            	   <div class="col-xs-12 col-sm-6 col-md-8">
   								   		<label class="col-sm-3 control-label">Investment Theme:</label>
 										 <div class="col-sm-4">
-										   				<span th:text="*{investmentTheme}" class="form-control-static"/>
+										   				<span th:text="*{investment}" class="form-control-static"/>
 										</div>
   								  </div>
 			                 <div class="col-xs-6 col-md-4">
   								   		<label class="col-sm-4 control-label">Project Size:</label>
 										 <div class="col-sm-4">
-										 	<span th:text="*{projectSize}" class="form-control-static"/>
+										 	<span th:text="*{size}" class="form-control-static"/>
 										</div>
   							 </div>
 			               </div>
@@ -86,3 +87,12 @@
 				</div>
 			        </div>
 					</form>
+	<script th:inline="javascript">
+	$(document).ready(function(){
+		var pmurl = /*[[@{/user/byID}]]*/;
+		 var id= $("#projectManagerId").val();
+		 $.getJSON(pmurl+"/"+id,function(data){
+			   $("#projectManger").text(data.fullName);
+		   });
+		 });
+	</script>

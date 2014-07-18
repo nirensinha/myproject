@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.nirensinha.myproject.model.Project;
 import com.nirensinha.myproject.model.Status;
 import com.nirensinha.myproject.service.ProjectService;
+import com.nirensinha.myproject.service.ReferenceDataService;
 import com.nirensinha.myproject.service.StatusService;
 
 @Controller
@@ -29,6 +30,9 @@ public class StatusController {
 	
 	@Resource
 	ProjectService projectService;
+	
+	@Resource
+	ReferenceDataService referenceDataService;
 	
 	
 	@RequestMapping(value = "/status/{projectName}/{projectId}", method = RequestMethod.GET)
@@ -54,6 +58,9 @@ public class StatusController {
 			model.addAttribute(STATUS,status);
 		}
 		Project project = projectService.findById(projectId);
+		//project.setInvestment(((referenceDataService.getInvestment()).get(project.getId())).getName());
+		//project.setModelName(((referenceDataService.getProjectModel()).get(project.getId())).getName());
+	//	project.setSize(((referenceDataService.getProjectSize()).get(project.getId())).getName());
 		model.addAttribute(PROJECT,project);
 		return  "editStatus";
 	}

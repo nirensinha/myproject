@@ -51,7 +51,8 @@ public class RepositoryProjectService implements ProjectService {
 
 	@Override
 	public List<Project> findMy(long projectManager) {
-		return projectRepository.findProjectByProjectManager(projectManager);
+		 return projectRepository.findProjectIDByProjectManager(projectManager);
+		// return projectRepository.findProjectByIds(ids);
 	}
 
 }

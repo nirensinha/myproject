@@ -7,14 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
-import org.hibernate.validator.constraints.*;
-
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="PROJECT")
@@ -23,7 +24,7 @@ public class Project {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID", nullable = false)
-	 private long Id;
+	 private long id;
 	
 	@NotEmpty
 	@Column(name = "NAME", nullable = false)
@@ -31,6 +32,10 @@ public class Project {
 	
 	@Column(name = "MODEL", nullable = true)
 	private int model;
+	
+	@OneToOne
+	@JoinColumn(name="MODEL",referencedColumnName="ID", insertable=false, updatable=false)
+	private ProjectModel projectModel;
 	
 	@NotEmpty
 	@Column(name = "PPM", nullable = false)
@@ -49,29 +54,65 @@ public class Project {
 	@Column(name = "PROJECT_MANAGER", nullable = false)
 	private long projectManager;
 	
+	@OneToOne
+	@JoinColumn(name="PROJECT_MANAGER",referencedColumnName="ID", insertable=false, updatable=false)
+	private User user;
+	
 	@Column(name = "PROJECT_SIZE", nullable = true)
 	private String projectSize;
 	
+	@OneToOne
+	@JoinColumn(name="PROJECT_SIZE",referencedColumnName="ID", insertable=false, updatable=false)
+	private ProjectSize size;
+	
 	@Column(name = "INVESTMENT_THEME", nullable = true)
-	private int investmentTheme;
+	private long investmentTheme;
+	
+	@OneToOne
+	@JoinColumn(name="INVESTMENT_THEME",referencedColumnName="ID", insertable=false, updatable=false)
+	private Investment investment;
 	
 	@Column(name = "OVERALL_RAG", nullable = true)
 	private int overallRag;
 	
+	@OneToOne
+	@JoinColumn(name="OVERALL_RAG",referencedColumnName="ID", insertable=false, updatable=false)
+	private RAG oRag;
+	
 	@Column(name = "TIME_RAG", nullable = true)
 	private int timeRag;
+	
+	@OneToOne
+	@JoinColumn(name="TIME_RAG",referencedColumnName="ID", insertable=false, updatable=false)
+	private RAG tRag;
 	
 	@Column(name = "BUDGET_RAG", nullable = true)
 	private int budgetRag;
 	
+	@OneToOne
+	@JoinColumn(name="BUDGET_RAG",referencedColumnName="ID", insertable=false, updatable=false)
+	private RAG bRag;
+	
 	@Column(name = "IMPACT_RISK_RAG", nullable = true)
 	private int impactRiskRag;
+	
+	@OneToOne
+	@JoinColumn(name="IMPACT_RISK_RAG",referencedColumnName="ID", insertable=false, updatable=false)
+	private RAG iRag;
 	
 	@Column(name = "RESOURCE_RAG", nullable = true)
 	private int resourceRag;
 	
+	@OneToOne
+	@JoinColumn(name="RESOURCE_RAG",referencedColumnName="ID", insertable=false, updatable=false)
+	private RAG rsRag;
+	
 	@Column(name = "CURRENT_PHASE", nullable = true)
 	private int currentPhase;
+	
+	@OneToOne
+	@JoinColumn(name="CURRENT_PHASE",referencedColumnName="ID", insertable=false, updatable=false)
+	private Phase phase;
 	
 	@Column(name = "PRIVACY", nullable = true)
 	private char privacy;
@@ -87,12 +128,14 @@ public class Project {
 	
 	@Column(name = "CREATED_BY", nullable = false)
 	 private long createdBy;
+	
 	 
 	@Column(name = "CREATED_DATE", nullable = false)
 	 private Date createdDate;
 	
 	@Column(name = "LAST_UPDATED_BY", nullable = false)
 	 private long lastUpdatedBy;
+	
 
 	@Column(name = "LAST_UPDATED_DATE", nullable = false)
 	 private Date lastUpdatedDate;
@@ -101,11 +144,11 @@ public class Project {
 	public Project(){}
 
 	public long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getName() {
@@ -172,11 +215,11 @@ public class Project {
 		this.projectSize = projectSize;
 	}
 
-	public int getInvestmentTheme() {
+	public long getInvestmentTheme() {
 		return investmentTheme;
 	}
 
-	public void setInvestmentTheme(int investmentTheme) {
+	public void setInvestmentTheme(long investmentTheme) {
 		this.investmentTheme = investmentTheme;
 	}
 
@@ -312,5 +355,11 @@ public class Project {
 	        return ToStringBuilder.reflectionToString(this);
 	    }
 
+	public Investment getInvestment() {
+		return investment;
+	}
 
+	public void setInvestment(Investment investment) {
+		this.investment = investment;
+	}
 }

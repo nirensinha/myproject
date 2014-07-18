@@ -1,6 +1,6 @@
 package com.nirensinha.myproject.service;
 
-import java.util.List;
+import java.util.Map;
 
 import com.nirensinha.myproject.model.Investment;
 import com.nirensinha.myproject.model.Phase;
@@ -11,17 +11,17 @@ import com.nirensinha.myproject.model.Role;
 
 public interface ReferenceDataService {
 	
-   public List<Investment> getInvestment();
+   public Map<Long,Investment> getInvestment();
    
-   public List<Phase> getPhase();
+   public Map<Long,Phase> getPhase();
    
-   public List<RAG> getRAG();
+   public Map<Long,RAG> getRAG();
    
-   public List<ProjectModel> getProjectModel();
+   public Map<Long,ProjectModel> getProjectModel();
    
-   public List<Role> getRole();
+   public Map<Long,Role> getRole();
    
-   public List<ProjectSize> getProjectSize();
+   public Map<Long,ProjectSize> getProjectSize();
 
 
 }

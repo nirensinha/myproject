@@ -1,6 +1,7 @@
 package com.nirensinha.myproject.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -13,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nirensinha.myproject.config.ReferenceDataLoader;
 import com.nirensinha.myproject.exception.ProjectNotFoundException;
 import com.nirensinha.myproject.model.Project;
-import com.nirensinha.myproject.model.ProjectList;
+import com.nirensinha.myproject.model.ProjectListWrapper;
 import com.nirensinha.myproject.service.ProjectService;
 import com.nirensinha.myproject.service.ReferenceDataService;
 import com.nirensinha.myproject.service.UserService;
@@ -28,21 +30,20 @@ public class ProjectController {
 	private static String CREATE = "create";
 	private static String EDIT = "edit";
 	private static String PROJECT = "project";
-	private static String INVESTMENT = "investment";
-	private static String PHASE = "phase";
-	private static String PROJECTMODEL = "projectModel";
-	private static String PROJECTSIZE = "projectSize";
-	private static String RAG = "rag";
+
 	
 	
 	@Resource
 	ProjectService service;
 	
 	@Resource
+	UserService userService;
+	
+	@Resource
 	ReferenceDataService referenceDataService;
 	
 	@Resource
-	UserService userService;
+	ReferenceDataLoader rdl;
 
 	
 	@RequestMapping(value = "/project/", method = RequestMethod.GET)
@@ -55,7 +56,7 @@ public class ProjectController {
 	public String create(ModelMap model) {
 		model.addAttribute(PROJECT, new Project());
 		model.addAttribute(VIEW,CREATE);
-		loadReferenceData(model);
+		rdl.load(model);
 		return "createProject";
 	}
 	
@@ -73,7 +74,7 @@ public class ProjectController {
 		model.addAttribute(VIEW,EDIT);
 		Project project = service.findById(id);
 		model.addAttribute(PROJECT,project);
-		loadReferenceData(model);
+		rdl.load(model);
 		return "editProject";
 	}
 	
@@ -88,7 +89,7 @@ public class ProjectController {
 			}
 		}
 		model.addAttribute(VIEW,EDIT);
-		loadReferenceData(model);
+		rdl.load(model);
 		return "editProject";
 	}
 	
@@ -98,21 +99,18 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value = "/project/my", method = RequestMethod.GET)
-	public @ResponseBody ProjectList listMy(Principal principal) {
+	public @ResponseBody ProjectListWrapper listMy(Principal principal) {
 		long projectManager = (userService.findByUsername(principal.getName())).getId();
-		ProjectList list = new ProjectList();
-		list.setData(service.findMy(projectManager));
+		List<Project> project = service.findMy(projectManager);
+	/*	for (Project p : project){
+			Map<Long, Investment> map = 	referenceDataService.getInvestment();
+			Investment i = map.get(p.getInvestmentTheme());
+			p.setInvestment(i.getName());
+		}*/
+		ProjectListWrapper list = new ProjectListWrapper();
+		list.setData(project);
 		return list;
 	}
 
-	private ModelMap loadReferenceData(ModelMap model){
-		model.addAttribute(INVESTMENT,referenceDataService.getInvestment());
-		model.addAttribute(PHASE,referenceDataService.getPhase());
-		model.addAttribute(PROJECTMODEL,referenceDataService.getProjectModel());
-		model.addAttribute(PROJECTSIZE,referenceDataService.getProjectSize());
-		model.addAttribute(RAG,referenceDataService.getRAG());
-		
 	
-		return model;
-	}
 }

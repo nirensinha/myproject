@@ -2,7 +2,7 @@ package com.nirensinha.myproject.model;
 
 import java.util.List;
 
-public class ProjectList {
+public class ProjectListWrapper {
 
 	private List<Project> data;
 
