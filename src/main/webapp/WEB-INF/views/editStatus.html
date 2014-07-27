@@ -7,7 +7,9 @@
   <meta name="author" content=""/>
   <link rel="shortcut icon"  th:href="@{/resources/images/favicon.jpg}"  type="image/jpeg"/>
   <link th:href="@{/resources/css/default.css}" rel="stylesheet"/>
-    <link th:href="@{/resources/css/jquery.ui.override.css}" rel="stylesheet"/>
+  <link th:href="@{/resources/css/jquery.ui.override.css}" rel="stylesheet"/>
+  <link th:href="@{/resources/css/jquery.dataTables.css}" rel="stylesheet"/>
+    
    <title>My Project</title>
      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		  <!--[if lt IE 9]>
@@ -15,6 +17,8 @@
 		  <script src="js/respond.min.js"></script>
 		  <![endif]-->
 	<div th:replace="fragments/scripts"></div>
+	<script src="../js/bootstrap-maxlength.min.js" th:src="@{/resources/js/bootstrap-maxlength.min.js}"></script>
+	
  </head>
  <body>
     <!-- Preloader -->
@@ -35,7 +39,7 @@
 						<div class="panel  panel-default">
 										<div class="panel-heading">
 								              <div class="panel-btns">
-									                  <a href="" class="minimize">−</a>
+									                  <a href="" class="minimize">&minus;</a>
 										                </div>
 						             		  <h4 class="panel-title">Report Summary</h4>
 						             		  	<div class="panel-body panel-body-nopadding">	
@@ -43,7 +47,7 @@
 						             		  				 <div class="col-xs-12 col-sm-6 col-md-8">
 			            		 									<label class="col-sm-3 control-label">Report Date:</label>
 			            		 									<div class="col-sm-8">
-			            		 											<span  th:text="${#dates.format(reportDate,'MM/dd/YYYY')}" class="form-control-static"/>
+			            		 											<span  th:text="*{reportDateString}" class="form-control-static"/>
 			            		 									</div>
 						             		  			</div>
 						             		  	
@@ -53,6 +57,7 @@
 				</div>
 				</form>
 				    <div th:replace="fragments/projectSummaryView"></div>
+				     <div th:replace="fragments/keyaccomplishment"></div>
 				</div>
 		</div>
 </section>

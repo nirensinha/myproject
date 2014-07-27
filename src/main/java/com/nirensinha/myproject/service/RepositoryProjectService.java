@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.nirensinha.myproject.exception.ProjectNotFoundException;
+import com.nirensinha.myproject.model.Model;
 import com.nirensinha.myproject.model.Project;
 import com.nirensinha.myproject.repository.ProjectRepository;
 
@@ -50,9 +51,8 @@ public class RepositoryProjectService implements ProjectService {
 	}
 
 	@Override
-	public List<Project> findMy(long projectManager) {
-		 return projectRepository.findProjectIDByProjectManager(projectManager);
-		// return projectRepository.findProjectByIds(ids);
+	public List<Model> findMy(long projectManager) {
+		 return projectRepository.getProjectListByProjectManager(projectManager);
 	}
 
 }

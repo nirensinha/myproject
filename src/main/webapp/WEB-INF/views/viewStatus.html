@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+  <link rel="shortcut icon"  th:href="@{/resources/images/favicon.jpg}"  type="image/jpeg"/>
+  <link th:href="@{/resources/css/default.css}" rel="stylesheet"/>
+  <link th:href="@{/resources/css/jquery.ui.override.css}" rel="stylesheet"/>
+  <link th:href="@{/resources/css/jquery.dataTables.css}" rel="stylesheet"/>
+    
+   <title>My Project</title>
+     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		  <!--[if lt IE 9]>
+		  <script src="js/html5shiv.min.js"></script>
+		  <script src="js/respond.min.js"></script>
+		  <![endif]-->
+	<div th:replace="fragments/scripts"></div>
+ </head>
+ <body>
+    <!-- Preloader -->
+<div id="preloader" >
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+<section>
+		<div th:include="fragments/leftpanel"></div>
+		<div class="mainpanel">
+				<div th:include="fragments/header"></div>
+				<div class="pageheader">
+						<h2>
+							<i class="fa fa-file-text"></i> View Project Status
+						</h2>
+				</div>
+				<div class="contentpanel">
+				 <div class="row">
+				<div class="col-md-12">
+					<div class="table-responsive dashboard-datatable">
+					<table id="statusList" class="table" cellspacing="0" width="100%">
+				        <thead>
+				            <tr>
+				                <th>Report Date</th>
+				                <th>RAG</th>
+				                <th>Include in Dashboard</th>
+				            </tr>
+				        </thead>
+					</table>
+					</div>
+			     </div>
+			     </div>
+				</div>
+		</div>
+</section>
+<script th:inline="javascript">
+ $(document).ready(function(){
+		var statusurl = /*[[@{/status/list/}]]*/;
+		var statusediturl = /*[[@{/status/edit/}]]*/;
+		var statusviewurl = /*[[@{/status/view/}]]*/;
+
+		$("li#myprojects").addClass("active");
+		$('#statusList').dataTable({
+			"bPaginate": false,
+			 "bProcessing": true,
+			 "bFilter":false,
+			 "ajax": statusurl+/*[[*{projectId}]]*/,
+			 "columns":[
+			            {"data":"reportDateString"},
+			            {"data":"oRag"},
+			            {"data":"include"}
+			            ]
+		});
+		$('#statusList tbody tr').live('click', function () { 
+			var aData = $('#statusList').dataTable().fnGetData(this);
+			var reportDate = aData.reportDateString.replace("/","").replace("/","");
+			 window.location = statusediturl+aData.id+"/"+reportDate;
+			}
+		);
+		$('#statusList tbody').hover(function() {
+		    $(this).css('cursor', 'pointer');
+		}, function() {
+		    $(this).css('cursor', 'auto');
+		});
+	 });
+</script>
+</body>
+</html>

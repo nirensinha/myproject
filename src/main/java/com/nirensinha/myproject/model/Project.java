@@ -362,4 +362,76 @@ public class Project {
 	public void setInvestment(Investment investment) {
 		this.investment = investment;
 	}
+
+	public ProjectModel getProjectModel() {
+		return projectModel;
+	}
+
+	public void setProjectModel(ProjectModel projectModel) {
+		this.projectModel = projectModel;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public ProjectSize getSize() {
+		return size;
+	}
+
+	public void setSize(ProjectSize size) {
+		this.size = size;
+	}
+
+	public RAG getoRag() {
+		return oRag;
+	}
+
+	public void setoRag(RAG oRag) {
+		this.oRag = oRag;
+	}
+
+	public RAG gettRag() {
+		return tRag;
+	}
+
+	public void settRag(RAG tRag) {
+		this.tRag = tRag;
+	}
+
+	public RAG getbRag() {
+		return bRag;
+	}
+
+	public void setbRag(RAG bRag) {
+		this.bRag = bRag;
+	}
+
+	public RAG getiRag() {
+		return iRag;
+	}
+
+	public void setiRag(RAG iRag) {
+		this.iRag = iRag;
+	}
+
+	public RAG getRsRag() {
+		return rsRag;
+	}
+
+	public void setRsRag(RAG rsRag) {
+		this.rsRag = rsRag;
+	}
+
+	public Phase getPhase() {
+		return phase;
+	}
+
+	public void setPhase(Phase phase) {
+		this.phase = phase;
+	}
 }

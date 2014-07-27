@@ -12,7 +12,7 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "STATUS" ,uniqueConstraints = {
+@Table(name = "PROJECT_STATUS" ,uniqueConstraints = {
 		@UniqueConstraint(columnNames = "PROJECT_ID"),
 		@UniqueConstraint(columnNames = "REPORT_DATE")
 		})
@@ -31,7 +31,13 @@ public class Status {
 	
 	@Column(name = "REPORT_DATE", nullable = false)
 	private Date reportDate;
+	
+	@Transient
+	private String reportDateString;
 
+	@Column(name="INCLUDE", nullable=true)
+	private String include;
+	
 	public long getId() {
 		return id;
 	}
@@ -62,5 +68,21 @@ public class Status {
 
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
+	}
+
+	public String getReportDateString() {
+		return reportDateString;
+	}
+
+	public void setReportDateString(String reportDateString) {
+		this.reportDateString = reportDateString;
+	}
+
+	public String getInclude() {
+		return include;
+	}
+
+	public void setInclude(String include) {
+		this.include = include;
 	}
 }

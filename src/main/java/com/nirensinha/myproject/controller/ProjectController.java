@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nirensinha.myproject.config.ReferenceDataLoader;
 import com.nirensinha.myproject.exception.ProjectNotFoundException;
+import com.nirensinha.myproject.model.Data;
+import com.nirensinha.myproject.model.Model;
 import com.nirensinha.myproject.model.Project;
-import com.nirensinha.myproject.model.ProjectListWrapper;
 import com.nirensinha.myproject.service.ProjectService;
 import com.nirensinha.myproject.service.ReferenceDataService;
 import com.nirensinha.myproject.service.UserService;
@@ -46,7 +47,7 @@ public class ProjectController {
 	ReferenceDataLoader rdl;
 
 	
-	@RequestMapping(value = "/project/", method = RequestMethod.GET)
+	@RequestMapping(value = "/project", method = RequestMethod.GET)
 	public String list(ModelMap model) {
 		model.addAttribute(VIEW,LIST);
 		return "myproject";
@@ -99,17 +100,12 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value = "/project/my", method = RequestMethod.GET)
-	public @ResponseBody ProjectListWrapper listMy(Principal principal) {
+	public @ResponseBody Data listMy(Principal principal) {
 		long projectManager = (userService.findByUsername(principal.getName())).getId();
-		List<Project> project = service.findMy(projectManager);
-	/*	for (Project p : project){
-			Map<Long, Investment> map = 	referenceDataService.getInvestment();
-			Investment i = map.get(p.getInvestmentTheme());
-			p.setInvestment(i.getName());
-		}*/
-		ProjectListWrapper list = new ProjectListWrapper();
-		list.setData(project);
-		return list;
+		Data data = new Data();
+		List<Model> p = service.findMy(projectManager);
+		data.setData(p);
+		return data;
 	}
 
 	

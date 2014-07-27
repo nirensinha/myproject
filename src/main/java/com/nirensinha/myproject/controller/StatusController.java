@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nirensinha.myproject.model.Data;
 import com.nirensinha.myproject.model.Project;
 import com.nirensinha.myproject.model.Status;
 import com.nirensinha.myproject.service.ProjectService;
@@ -22,8 +23,11 @@ public class StatusController {
 	
 	private static String STATUS = "status";
 	private static String PROJECT = "project";
-	
+	private static String PROJECT_ID = "projectId";
+
 	SimpleDateFormat sdf = new SimpleDateFormat("MMddyyyy");
+	SimpleDateFormat sdf_ = new SimpleDateFormat("MM/dd/yyyy");
+
 	
 	@Resource
 	StatusService service;
@@ -51,16 +55,27 @@ public class StatusController {
 		return  "redirect:/status/edit/"+status.getProjectId()+"/"+reportDate;
 	}
 	
+	@RequestMapping(value="/status/view/{projectId}", method=RequestMethod.GET)
+	public String viewStatus(@PathVariable long projectId,ModelMap model){
+		model.addAttribute(PROJECT_ID, projectId);
+		return "viewStatus";		
+	}
+	
+	@RequestMapping(value="/status/list/{projectId}", method=RequestMethod.GET)
+	public @ResponseBody Data listStatus(@PathVariable long projectId){
+		Data data = new Data();
+		data.setData(service.getStatusByProject(projectId));
+		return data;
+	}
+	
 	@RequestMapping(value = "/status/edit/{projectId}/{reportDate}", method = RequestMethod.GET)
 	public String saveStatus(@PathVariable long projectId, @PathVariable String reportDate,ModelMap model) {
 		if(!model.containsAttribute(STATUS)){
 			Status status =  service.findByProjectIdAndReportDate(projectId, reportDate);
+			status.setReportDateString(sdf_.format(status.getReportDate()));
 			model.addAttribute(STATUS,status);
 		}
 		Project project = projectService.findById(projectId);
-		//project.setInvestment(((referenceDataService.getInvestment()).get(project.getId())).getName());
-		//project.setModelName(((referenceDataService.getProjectModel()).get(project.getId())).getName());
-	//	project.setSize(((referenceDataService.getProjectSize()).get(project.getId())).getName());
 		model.addAttribute(PROJECT,project);
 		return  "editStatus";
 	}

@@ -26,16 +26,16 @@ public class Investment{
 	@Column(name = "NAME", nullable = false)
 	private String name;
 	
-	@Column(name = "CREATED_BY")
+	@Column(name = "CREATED_BY" , nullable = false)
 	private long createdBy;
 	
-	@Column(name = "CREATED_DATE")
+	@Column(name = "CREATED_DATE" , nullable = false)
 	private Date createdDate;
 	
-	@Column(name = "LAST_UPDATED_BY")
+	@Column(name = "LAST_UPDATED_BY" , nullable = false)
 	private long lastUpdatedBy;
 	
-	@Column(name = "LAST_UPDATED_DATE")
+	@Column(name = "LAST_UPDATED_DATE" , nullable = false)
 	private Date lastUpdatedDate;
 
 	public long getId() {
@@ -89,7 +89,6 @@ public class Investment{
 	@PreUpdate
 	  public void preUpdate() {
 	        lastUpdatedDate = new Date();
-	        lastUpdatedBy=0;
 	    }
 	 
 	  @PrePersist
@@ -97,8 +96,6 @@ public class Investment{
 	        Date now = new Date();
 	        createdDate = now;
 	        lastUpdatedDate = now;
-	        createdBy = 0;
-	        lastUpdatedBy =0;
 	    }
 
 	  @Override

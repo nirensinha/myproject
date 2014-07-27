@@ -107,7 +107,9 @@ h4, .h4 {
 .form-inline .checkbox {
    margin-right: 20px;
 }
-
+.datefield{
+	width:40%;
+}
 .form-control {
    -moz-border-radius: 3px;
    -webkit-border-radius: 3px;
@@ -787,6 +789,10 @@ h4, .h4 {
 .form-horizontal .control-label {
    font-weight: normal;
 }
+.form-horizontal .control-label-left {
+   font-weight: normal;
+   text-align:left;
+}
 
 .has-success .form-control,
 .has-warning .form-control,
@@ -1294,17 +1300,13 @@ small.media-desc {
    -webkit-box-shadow: none;
    box-shadow: none;
 }
-@media (min-width: 992px){
-.col-md-8 {
-width: 60%;
-}
-.col-md-4 {
-width: 40%;
-}
-}
+
 @media (min-width: 768px){
 .col-sm-4 {
   width: 45%;
+}
+.modal-lg{
+	width:600px;
 }
 }
 
@@ -1324,4 +1326,15 @@ width: 40%;
 	.col-sm-4 {
   		width: 100%;
 		}
+}
+@media (min-width: 992px){
+.col-md-8 {
+width: 60%;
+}
+.col-md-4 {
+width: 40%;
+}
+.modal-lg{
+	width:900px;
+}
 }

@@ -2,7 +2,7 @@ package com.nirensinha.myproject.model;
 
 public class ProjectView{
 	
-	 private long Id;
+	 private long id;
 	
 	 private String name;
 	 
@@ -24,8 +24,8 @@ public class ProjectView{
 	 
 	 public ProjectView(){};
 	 
-	 public ProjectView(long Id, String name, String model, String ppm, String mer, String merName, String projectManager, String projectSize, String investmentTheme, String overallRag){
-		 this.Id = Id;
+	 public ProjectView(long id, String name, String model, String ppm, String mer, String merName, String projectManager, String projectSize, String investmentTheme, String overallRag){
+		 this.id = id;
 		 this.name = name;
 		 this.model = model;
 		 this.ppm = ppm;
@@ -36,11 +36,11 @@ public class ProjectView{
 	 }
 
 	public long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getName() {

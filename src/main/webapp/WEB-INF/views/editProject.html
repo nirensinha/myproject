@@ -15,6 +15,7 @@
 		  <script src="js/respond.min.js"></script>
 		  <![endif]-->
 	<div th:replace="fragments/scripts"></div>
+	
  </head>
  <body>
     
@@ -31,6 +32,7 @@
 							<i class="fa fa-briefcase"></i> Edit Project	
 						</h2>
 					<div class="create-button">
+							 <button class="btn btn-orange" id="viewStatus">View Status</button>
 							 <button class="btn btn-orange" id="createStatus" data-toggle="modal" data-target=".create-status-modal">Create Status</button>
 					</div>
 				</div>
@@ -39,7 +41,7 @@
 					<div class="panel  panel-default">
 						<div class="panel-heading">
 				              <div class="panel-btns">
-					                  <a href="" class="minimize">−</a>
+					                  <a href="" class="minimize">&minus;</a>
 						                </div>
 		             		  <h4 class="panel-title">Project Summary</h4>
 			             </div>
@@ -48,7 +50,7 @@
 		                <div class="panel-footer">
 			            		 <div class="col-sm-6 col-sm-offset-5">
 									  <button class="btn btn-orange">Submit</button>&nbsp;
-				  					<button class="btn btn-default">Cancel</button>
+				  					<button class="btn btn-default" id="cancel">Cancel</button>
 								</div>
 						 </div>
 				</div>
@@ -58,7 +60,7 @@
 				</div>
 		</section>
 			<div class="modal fade create-status-modal" tabindex="-1" role="dialog" aria-labelledby="createStatus" aria-hidden="true" data-backdrop="static">
-			  <div class="modal-dialog modal-lg">
+			  <div class="modal-dialog modal-sm">
 			    <div class="modal-content">
 			       
 			    </div>
@@ -69,12 +71,20 @@
  $(document).ready(function(){
 		$("li#myprojects").addClass("active");
 		jQuery('#datepicker').datepicker();
+		var id = $("#id").val();
 		var statusUrl = /*[[@{/status}]]*/;
 		$("#createStatus").click(function(){
-			  var id = $("#id").val();
 			  var name = $("#name").val();
 			  $(".modal-content").load(statusUrl+"/"+encodeURIComponent(name)+"/"+id);
 		});
+		$("#cancel").click(function(){
+			document.location.href= /*[[@{/project}]]*/;
+			return false;
+		});
+		$("#viewStatus").click(function(){
+			var viewURL = /*[[@{/status/view/}]]*/;
+			document.location.href= viewURL +id;
+		})
 	 });
 </script>
 </body>

@@ -2,6 +2,7 @@ package com.nirensinha.myproject.service;
 
 import java.util.List;
 
+import com.nirensinha.myproject.model.Model;
 import com.nirensinha.myproject.model.Status;
 
 public interface StatusService {
@@ -13,6 +14,8 @@ public interface StatusService {
 		public List<Status> findAll();
 		
 	    public Status findById(Long id);
+	    
+	    public List<Model> getStatusByProject(long projectId);
 
 	    public Status save(Status status);
 	    

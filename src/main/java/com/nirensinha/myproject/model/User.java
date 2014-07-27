@@ -9,21 +9,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.NamedQuery;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Id;
 
 @Entity
-@NamedQuery(name = "User.findByUserName", query = "SELECT u FROM User u WHERE LOWER(u.userName) = LOWER(?1)")
 @Table(name="USER")
 public class User {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID", nullable = false)
-	 private long Id;
+	 private long id;
 	
 	@Column(name = "USER_NAME", nullable = false)
 	 private String userName;
@@ -78,11 +76,11 @@ public class User {
 	}
 
 	public long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getUserName() {

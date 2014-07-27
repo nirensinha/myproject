@@ -924,7 +924,7 @@ p {
     width: 18px;
     height: 18px;
     position: absolute;
-    top: 1px;
+    top: 6px;
     left: 0;
     content: '';
     display: inline-block;
@@ -947,7 +947,7 @@ p {
     font-family: 'FontAwesome';
     content: "\F00C";
     position: absolute;
-    top: 0;
+    top: 4px;
     left: 3.5px;
     display: inline-block;
     font-size: 11px;
@@ -965,8 +965,8 @@ p {
 }
 
 .ckbox-primary input[type="checkbox"]:checked + label:before {
-    border-color: #357EBD;
-    background-color: #428BCA;
+    border-color: #d67003;
+    background-color: #de7504;
 }
 
 .ckbox-warning input[type="checkbox"]:checked + label:before {
@@ -3021,7 +3021,9 @@ div.error label.error:before {
 .signinpanel form a {
     color: #666;
 }
-
+.datatable-button{
+	right:25px;
+}
 /* sign up */
 
 .signuppanel {

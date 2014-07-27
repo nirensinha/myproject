@@ -1,0 +1,74 @@
+	<div class="panel  panel-default">
+						<div class="panel-heading">
+				              <div class="panel-btns">
+					                  <a href="" class="minimize">&minus;</a>
+						                </div>
+		             		  <h4 class="panel-title">Key Accomplishment</h4>
+			             </div>
+				<div class="panel-body panel-body-nopadding">	
+				<div class="col-md-12">
+					<div class="table-responsive dashboard-datatable">
+					<table id="keyaccomplishment" class="table" cellspacing="0" width="100%">
+				        <thead>
+				            <tr>
+				                <th>Accomplishment</th>
+				                <th>Date</th>
+				                <th>Display in Executive Report?</th>
+				                <th>Display in Leads Report?</th>
+				            </tr>
+				        </thead>
+					</table>
+					</div>
+			     </div>
+			     </div>
+			     <div class="panel-footer">
+			        <div class="col-sm-6">
+			     		<button class="btn btn-orange" id="add" data-toggle="modal" data-target=".accomplishment-modal">Add</button>
+			     		<button class="btn btn-orange" id="delete">Delete</button>
+			     	</div>
+			     </div>
+		</div>
+		<div class="modal fade accomplishment-modal" tabindex="-1" role="dialog" aria-labelledby="accomplishment" aria-hidden="true" data-backdrop="static">
+			  <div class="modal-dialog modal-lg">
+			    <div class="modal-content">
+			       
+			    </div>
+			  </div>
+			</div>
+		<script th:inline="javascript">
+		var key_;
+			$(document).ready(function(){
+				var keyaccompUrl = /*[[@{/keyaccomplishment}]]*/
+				var projectId = /*[[*{projectId}]]*/;
+			     key_ = $('#keyaccomplishment').dataTable({
+					"bPaginate": false,
+					 "bProcessing": true,
+					 "bFilter":false,
+					 "ajax": keyaccompUrl +"/list/" +projectId ,
+					 "fnCreatedRow":function(nRow,aData,iDataIndex){$(nRow).attr( 'data-toggle','modal' );$(nRow).attr("data-target",".accomplishment-modal")},
+					 "columns":[
+					            {"sWidth":"50%","data":"accomplishments"},
+					            {"sWidth":"10%","data":"accomplishmentDate"},
+					            {"sWidth":"20%","data":"displayInSummary"},
+					            {"sWidth":"20%","data":"displayInReports"}
+					            ],
+					    "order":[[2,"asc"]]
+				});
+			    
+			    $("#add").click(function(){
+					  $(".modal-content").load(keyaccompUrl+"/"+projectId);
+			    });
+			    $('#keyaccomplishment tbody tr').live('click', function () { 
+					var aData = $('#keyaccomplishment').dataTable().fnGetData(this);
+ 					  $(".modal-content").load(keyaccompUrl+"/edit/"+aData.id);
+					}
+				);
+			    $('#keyaccomplishment tbody').hover(function() {
+				    $(this).css('cursor', 'pointer');
+				}, function() {
+				    $(this).css('cursor', 'auto');
+				});
+			});
+			
+			
+		</script>

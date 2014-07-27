@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.nirensinha.myproject.model.Model;
 import com.nirensinha.myproject.model.Status;
 import com.nirensinha.myproject.repository.StatusRepository;
 
@@ -87,6 +88,11 @@ public class RepositoryStatusService implements StatusService{
 			return new Status();
 		}
 		return statusRepository.findStatusByProjectIdAndReportDate(projectId, date);
+	}
+
+	@Override
+	public List<Model> getStatusByProject(long projectId) {
+   		return statusRepository.getStatusListByProjectId(projectId);
 	}
 
 }
